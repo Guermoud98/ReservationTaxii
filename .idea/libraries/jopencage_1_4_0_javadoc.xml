@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="jopencage-1.4.0-javadoc">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../../../../jopencage-1.4.0-javadoc.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

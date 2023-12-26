@@ -22,6 +22,7 @@ public class IConducteurDAOimplement implements IConducteurDAO {
         try {
             //isValidEmail(p.getEmail());  On fait appel à la fonction isValidEmail pour verifier la validité de l'email
             if (isValidEmail(p.getEmail()) && isValidPassword(p.getPassword()) && !isExistEmail(p.getEmail())) {
+                String matricule = selectRandomMatricule();
                 stmt = conn.prepareStatement("INSERT INTO conducteur(nom, prenom, telephone, email, password, matricule)"
                         + "VALUES (?, ?, ?, ?, ?, ?)");
                 stmt.setString(1, p.getNom());
@@ -29,7 +30,8 @@ public class IConducteurDAOimplement implements IConducteurDAO {
                 stmt.setString(3, p.getTelephone());
                 stmt.setString(4, p.getEmail().toLowerCase());
                 stmt.setString(5, p.getPassword());
-                stmt.setString(6, selectRandomMatricule() );
+                stmt.setString(6, matricule );
+                updateTaxiAffectationConducteur(matricule); //on met a jour de la colonne taxiAffectation = Oui
                 stmt.executeUpdate();
                 System.out.println("Inserted!");
                 // On doit mettre a jour le status du taxi car il n'est plus dispo
@@ -104,8 +106,8 @@ public class IConducteurDAOimplement implements IConducteurDAO {
     public String selectRandomMatricule() {
         String matricule = "";
         try {
-            stmt2 = conn.prepareStatement("SELECT TOP 1 matricule FROM taxi WHERE status = ? ORDER BY NEWID()");
-            stmt2.setString(1, "Disponible");
+            stmt2 = conn.prepareStatement("SELECT TOP 1 matricule FROM taxi WHERE affectationConducteur = ? ORDER BY NEWID()");
+            stmt2.setString(1, "Non");
             rs = stmt2.executeQuery();
             while(rs.next()) {
                 matricule = rs.getString("matricule");
@@ -153,11 +155,11 @@ public class IConducteurDAOimplement implements IConducteurDAO {
     }
 
 
-    public void conducteurOfATaxi(String matriule) {
+    public void conducteurOfATaxi(String matricule) {
         try {
 
             stmt = conn.prepareStatement("SELECT * FROM conducteur WHERE matricule= ?");
-            stmt.setString(1, matriule);
+            stmt.setString(1, matricule);
             rs = stmt.executeQuery();
             while (rs.next()) {
                 System.out.println("[idConducteur: " + rs.getString("idConducteur")
@@ -172,6 +174,7 @@ public class IConducteurDAOimplement implements IConducteurDAO {
         }
 
     }
+    // La methode getRandomConducteur affecte un conducteur  pour une reservation d'un client donne
     public List<Object> getRandomConducteur() {
         List<Object> l = new ArrayList<>();
         try {
@@ -189,5 +192,23 @@ public class IConducteurDAOimplement implements IConducteurDAO {
             e.printStackTrace();
         }
         return l;
+    }
+    //Lorsqu'un conducteur est inscrit , on lui affecte un taxi, dans ce cas nous devons change la colonne affecationConducteuur
+    public void updateTaxiAffectationConducteur(String matricule) {
+        String mat = selectRandomMatricule();
+        try {
+            stmt3 = conn.prepareStatement("UPDATE taxi SET affectationConducteur = ? WHERE matricule = ?");
+            stmt3.setString(1, "Oui");
+            stmt3.setString(2, matricule );
+            stmt3.executeUpdate();
+            conn.commit();
+            System.out.println("affectationConducteur updated");
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
     }
 }
