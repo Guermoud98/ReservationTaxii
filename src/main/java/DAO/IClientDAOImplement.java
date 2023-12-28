@@ -17,21 +17,36 @@ public class IClientDAOImplement implements IClientDAO {
     public void register(Personne p) {
         try {
             //isValidEmail(p.getEmail());  On fait appel à la fonction isValidEmail pour verifier la validité de l'email
-            if (isValidEmail(p.getEmail()) && isValidPassword(p.getPassword()) && !isExistEmail(p.getEmail())) {
-                stmt = conn.prepareStatement("INSERT INTO client(nom, prenom, telephone, email, password)"
-                        + "VALUES (?, ?, ?, ?, ?)");
-                stmt.setString(1, p.getNom());
-                stmt.setString(2, p.getPrenom());
-                stmt.setString(3, p.getTelephone());
-                stmt.setString(4, p.getEmail().toLowerCase());
-                stmt.setString(5, p.getPassword());
-                stmt.executeUpdate();
-                System.out.println("Inserted!");
+            if (isValidEmail(p.getEmail()) && isValidPassword(p.getPassword())) {
+                if (!isExistEmail(p.getEmail())) {
+                    stmt = conn.prepareStatement("INSERT INTO client(nom, prenom, telephone, email, password)"
+                            + "VALUES (?, ?, ?, ?, ?)");
+                    stmt.setString(1, p.getNom());
+                    stmt.setString(2, p.getPrenom());
+                    stmt.setString(3, p.getTelephone());
+                    stmt.setString(4, p.getEmail().toLowerCase());
+                    stmt.setString(5, p.getPassword());
+                    stmt.executeUpdate();
+                    int n = stmt.executeUpdate();
+                    // I added these lines of code to test and verify if the row was inserted successfully
+                    if (n > 0) {
+                        System.out.println("Client Inserted!");
+                    }
+                    else {
+                        System.out.println("Client not Inserted!");
+                    }
 
-            } else if (isExistEmail(p.getEmail())) {
-                System.out.println("The email is already exists!!");
+                } else {
+                    System.out.println("Email already exist");
+                }
+            } else {
+                if (!isValidEmail(p.getEmail())) {
+                    System.out.println("Invalid Email");
+                }
+                if (!isValidPassword(p.getPassword())) {
+                    System.out.println("Invalid password");
+                }
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -53,6 +68,7 @@ public class IClientDAOImplement implements IClientDAO {
             rs = stmt.executeQuery();
             while (rs.next()) {
                 flag = true;
+                break;
             }
             rs.close();
 

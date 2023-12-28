@@ -15,7 +15,6 @@
     <orderEntry type="library" name="json-20231013" level="project" />
     <orderEntry type="library" name="jopencage-1.4.0-javadoc" level="project" />
     <orderEntry type="library" name="Maven: com.byteowls:jopencage:1.4.0" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: org.slf4j:slf4j-api:1.7.25" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.httpcomponents:httpclient:4.5.6" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.httpcomponents:httpcore:4.4.10" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: commons-logging:commons-logging:1.2" level="project" />
@@ -23,5 +22,6 @@
     <orderEntry type="library" scope="RUNTIME" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.9.7" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: com.fasterxml.jackson.core:jackson-core:2.9.7" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.9.7" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:2.0.5" level="project" />
   </component>
 </module>

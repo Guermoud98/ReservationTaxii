@@ -12,15 +12,17 @@ public class Test {
      LocalTime time = LocalTime.now();
      Connection conn = ConnectionDB.getConnexion();
      IReservationDAO res = new IReservationDAOImplement();
-     Conducteur cond = new Conducteur("Adam", "Smith", "0645365478", "adam.sm@gmail.com", "Aq67@");
-     Client cl = new Client("meriem", "aitAli", "0656787656", "meriem.ait@gmail.com", "Merry@1");
+     IClientDAO i = new IClientDAOImplement();
+     Conducteur cond = new Conducteur("Amine", "Madd", "0866554455", "amine.a@gmail.com", "Am@#s1d");
+
+     Client cl = new Client("guerra", "dalal", "1233", "guerra.dal@gmail.com", "T1a@A");
      IConducteurDAO c = new IConducteurDAOimplement();
      //c.register(cond);
-     Reservation r = new Reservation("Bab Doukala", "Gueliz", "Espece", 25.0f, date, time, cl);
+     //Reservation r = new Reservation("Sidi Abbad", "Targa", "Carte Bancaire", 30.0f, date, time, cl);
      //res.insertReservation(r);
      //c.login("jacki.f@gmail.com", "Ja@18");
+     c.register(cond);
 
-     //IClientDAO i = new IClientDAOImplement();
      //ITaxiDAO taxi = new ITaxiDAOImplementation();
      //IReservationDAO res = new IReservationDAOImplement();
      //res.getAllReservations();

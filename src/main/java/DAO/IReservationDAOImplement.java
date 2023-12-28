@@ -11,6 +11,10 @@ public class IReservationDAOImplement implements IReservationDAO{
     Connection conn = ConnectionDB.getConnexion();
     PreparedStatement stmt = null;
     ResultSet rs = null;
+
+    IClientDAO client = new IClientDAOImplement();
+    IConducteurDAO conducteur = new IConducteurDAOimplement();
+    ITaxiDAO taxi = new ITaxiDAOImplementation();
     public void getAllReservations() {
         try {
             stmt = conn.prepareStatement("SELECT * FROM reservation");
@@ -32,10 +36,10 @@ public class IReservationDAOImplement implements IReservationDAO{
 
     }
     public void insertReservation(Reservation r) {
-        IPersonneDAO i = new IClientDAOImplement();
-        int idClient = i.getIdFromDB(r.getClient()); // l'argument est un client
-        IConducteurDAO i1 = new IConducteurDAOimplement();
-        List<Object> l = i1.getRandomConducteur(); // retourne une listequi contient l'id d'un conducteur affecté à une reservation + le matricule de son taxi
+
+        int idClient = client.getIdFromDB(r.getClient()); // l'argument est un client
+
+        List<Object> l = conducteur.getRandomConducteur(); // retourne une listequi contient l'id d'un conducteur affecté à une reservation + le matricule de son taxi
 
         try {
             stmt = conn.prepareStatement("INSERT INTO reservation(lieuSource, lieuDestination, typePaiement, tarif, date, heure, idClient, idConducteur, matricule) VALUES (?,?,?,?,?,?,?,?,?)");
@@ -48,9 +52,15 @@ public class IReservationDAOImplement implements IReservationDAO{
             stmt.setInt(7, idClient);
             stmt.setInt(8, (Integer) l.get(0)); //the cast is mandatory because the list contains objects
             stmt.setString(9, (String) l.get(1));
-            i1.updateTaxiStatus((String) l.get(1)); //pour faire un mise a jour du status du taxi choisi pour cette reservation
-            stmt.executeUpdate();
-            System.out.println("inserted reservation");
+            taxi.updateTaxiStatus((String) l.get(1)); //pour faire un mise a jour du status du taxi choisi pour cette reservation
+            int n = stmt.executeUpdate();
+            if (n > 0) {
+                System.out.println("reservation inserted ");
+            }
+            else {
+                System.out.println("reservation not inserted");
+            }
+
 
         } catch (Exception e) {
             e.printStackTrace();
