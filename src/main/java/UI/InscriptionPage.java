@@ -68,8 +68,7 @@ public class InscriptionPage extends JFrame {
                             break;
                     }
                 }
-                else {
-                    ChoixRolePage.roleChoisi = "conducteur";
+                else if ("conducteur".equals(ChoixRolePage.roleChoisi)) {
                     Personne conducteur = new Conducteur(name, firstName, phone, email, password);
                     ErreurInscription erreurConducteur = conducteurDAO.register(conducteur);
                     switch (erreurConducteur) {
@@ -87,6 +86,7 @@ public class InscriptionPage extends JFrame {
                             break;
                         case AUCUNE_ERREUR:
                             new ReservationPage();
+                            //new ConducteurProfilPage();
                             dispose();
                             break;
                     }

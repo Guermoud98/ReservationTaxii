@@ -31,6 +31,17 @@ public class ReservationPage extends JFrame {
             frame.setSize(900, 600);
             frame.setLocationRelativeTo(null); // Centrer la fenêtre sur l'écran
 
+            //Menu
+            JMenu menu = new JMenu("Menu");
+            // element qui constitue le Menu
+            JMenuItem e1 = new JMenuItem("Profil");
+            //barre de menu
+            JMenuBar menuBar = new JMenuBar();
+            menu.add(e1);
+            // l'ajout du menu au barre de menu
+            menuBar.add(menu);
+
+
             JPanel panel = new JPanel(new GridBagLayout()) {
                 @Override
                 protected void paintComponent(Graphics g) {
@@ -110,6 +121,9 @@ public class ReservationPage extends JFrame {
 
             });
 
+            //Menu :
+
+
 
             cancelButton.addActionListener(new ActionListener() {
                 @Override
@@ -118,6 +132,21 @@ public class ReservationPage extends JFrame {
                     destinationField.setText("");
                 }
             });
+
+            //profil item
+
+
+            e1.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    new PassagerProfilPage();
+                    frame.dispose();
+
+                }
+            });
+
+
+
 
             gbc.gridx = 0;
             gbc.gridy = 0;
@@ -152,13 +181,17 @@ public class ReservationPage extends JFrame {
             gbc.gridwidth = 1;
             panel.add(reserveButton, gbc);
 
+            // L'ajout du menu au frame:
+            frame.setJMenuBar(menuBar);
+
             gbc.gridx = 1;
             panel.add(cancelButton, gbc);
 
-
-
             frame.getContentPane().add(panel);
             frame.setVisible(true);
+
+
+
 
     }
 }

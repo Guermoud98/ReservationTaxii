@@ -15,7 +15,7 @@ CREATE TABLE client (
 );
 SELECT * FROM client;
 DROP TABLE client;
-DELETE FROM client WHERE idClient = 11;
+DELETE FROM client WHERE idClient = 40;
 
 
 --Taxi
@@ -28,11 +28,11 @@ CREATE TABLE taxi (
 
 );
 SELECT * FROM taxi;
-
+DEF789
 DELETE taxi;
 DROP TABLE taxi;
 UPDATE taxi SET affectationConducteur= 'Non' WHERE matricule = 'VWX567';
-
+Update taxi Set status = 'Disponible' WHERE matricule = 'MNO345'
 
 
 CREATE TABLE conducteur (

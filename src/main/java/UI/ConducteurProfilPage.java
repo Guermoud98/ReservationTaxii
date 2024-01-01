@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ConducteurProfilePage extends JFrame {
+public class ConducteurProfilPage extends JFrame {
 
     private JTextField nomField;
     private JTextField prenomField;
@@ -17,15 +17,16 @@ public class ConducteurProfilePage extends JFrame {
     private JTextField matriculeField;
 
     private IConducteurDAO conducteur = new IConducteurDAOImplement();
-    public ConducteurProfilePage() {
+    public ConducteurProfilPage() {
         initializeUI();
     }
 
     private void initializeUI() {
         // on a le conducteur qui est connecte en se basant de son id
-        Conducteur c = (Conducteur) conducteur.getPersonneById(ConducteurConnecte.getConducteurId());
+        Conducteur c = (Conducteur) conducteur.getPersonneById(4);
+        System.out.println(ConducteurConnecte.getConducteurId());
 
-        setTitle("Conductor Profile");
+        setTitle("Conducteur Profile");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 300);
 
@@ -83,8 +84,12 @@ public class ConducteurProfilePage extends JFrame {
          */
         matriculeField = new JTextField(conducteur.getMatriculeConducteur(ConducteurConnecte.getConducteurId()));
         matriculeField.setEditable(false);
+        matriculeField.setPreferredSize(new Dimension(150, 25)); // Adjust the size
         panel.add(matriculeField, gbc);
+        //
 
+
+        //
         // Modify Fields Button
         gbc.gridx = 0;
         gbc.gridy = 4;
@@ -121,7 +126,7 @@ public class ConducteurProfilePage extends JFrame {
                 conducteur.updateNom(c, nomField.getText());
                 conducteur.updatePrenom(c, prenomField.getText());
                 conducteur.updateTelephone(c, telephoneField.getText());
-                JOptionPane.showMessageDialog(ConducteurProfilePage.this,
+                JOptionPane.showMessageDialog(ConducteurProfilPage.this,
                         "Changes Confirmed:\nNom: " + nomField.getText() +
                                 "\nPrenom: " + prenomField.getText() +
                                 "\nTelephone: " + telephoneField.getText() +

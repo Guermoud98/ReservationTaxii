@@ -47,7 +47,8 @@ public class ConnexionPage extends JFrame {
                             ConducteurConnecte.setConducteurId(id);//pour savoir l'id du conducteur connecte pour lui afficher par exemple les reservations qui lui concerne
                             System.out.println(ConducteurConnecte.getConducteurId());
                             JOptionPane.showMessageDialog(ConnexionPage.this, "Connexion réussie !","Informations de Connexion", JOptionPane.INFORMATION_MESSAGE);
-                            new ConducteurProfilePage();
+                            //new ConducteurProfilPage();
+                            new AfficherReservationPage(); //On affiche la page qui concerne les reservations du conducteur connecté
                             dispose();
                         }
                         else {

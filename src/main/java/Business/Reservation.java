@@ -1,6 +1,8 @@
 package Business;
 
 
+import java.sql.Date;
+import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 public class Reservation {
@@ -23,6 +25,9 @@ public class Reservation {
         this.heure = heure;
         this.client = cl;
         this.typePaiement = typePaiement;
+    }
+    public Reservation() {
+
     }
 
     public String getLieuSource() {
@@ -53,6 +58,26 @@ public class Reservation {
         this.client = client;
     }
 
+    public void setClientId(int id) {
+        this.client.setId(id);
+    }
+    public int getClientId() {
+        return client.getIdClient();
+    }
+    public void setConducteurMatriule(String matricule) {
+        this.conducteur.setMatricule(matricule);
+    }
+    public String getConducteurMatricule() {
+        return conducteur.getMatricule();
+    }
+
+    public void setConducteurId(int id) {
+        // If the conducteur is null, create a new instance
+        if (this.conducteur == null) {
+            this.conducteur = new Conducteur();
+        }
+        this.conducteur.setIdConducteur(id);
+    }
     public Conducteur getConducteur() {
         return conducteur;
     }
@@ -101,4 +126,5 @@ public class Reservation {
                 ", heure=" + heure +
                 '}';
     }
+
 }

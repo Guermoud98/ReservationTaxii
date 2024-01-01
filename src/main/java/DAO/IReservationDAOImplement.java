@@ -1,10 +1,13 @@
 package DAO;
 
+import Business.Client;
+import Business.Conducteur;
 import Business.Reservation;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalTime;
 import java.util.List;
 
 public class IReservationDAOImplement implements IReservationDAO{
@@ -66,4 +69,42 @@ public class IReservationDAOImplement implements IReservationDAO{
             e.printStackTrace();
         }
     }
+    @Override
+    public Reservation getReservationById(int idConducteur) {
+        Reservation reservation = null;
+        Client cl = new Client();
+        Conducteur con = new Conducteur();
+        try {
+            stmt = conn.prepareStatement("SELECT * FROM reservation WHERE idConducteur = ?");
+            stmt.setInt(1, idConducteur);
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                reservation = new Reservation();
+                reservation.setLieuSource(rs.getString("lieuSource"));
+                reservation.setLieuDestination(rs.getString("lieuDestination"));
+                reservation.setTypePaiement(rs.getString("typePaiement"));
+                reservation.setTarif(rs.getFloat("tarif"));
+                reservation.setD(rs.getDate("date").toLocalDate());
+                reservation.setHeure(rs.getTime("heure").toLocalTime());
+
+                // Set the Client object in the Reservation
+                cl.setId(rs.getInt("idClient"));
+                reservation.setClient(cl);
+
+                con.setMatricule(rs.getString("matricule"));
+                reservation.setConducteurId(rs.getInt("idConducteur"));
+                reservation.setConducteur(con);
+                reservation.setConducteurMatriule(rs.getString("matricule"));
+
+                // You may also need to set other fields like idReservation, etc.
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return reservation;
+    }
+
+
 }
