@@ -12,5 +12,7 @@ public interface IConducteurDAO extends IPersonneDAO {
     //public Conducteur SelectConducteurOfTaxi(Taxi taxi)
     //public void getAllConducteurs();
     public void conducteurOfATaxi(String matricule);
+    public String getMatriculeConducteur(int id);
+
 
 }

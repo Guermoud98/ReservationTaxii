@@ -15,13 +15,13 @@ public class Test {
      IClientDAO i = new IClientDAOImplement();
      Conducteur cond = new Conducteur("Amine", "Madd", "0866554455", "amine.a@gmail.com", "Am@#s1d");
 
-     Client cl = new Client("guerra", "dalal", "1233", "guerra.dal@gmail.com", "T1a@A");
-     IConducteurDAO c = new IConducteurDAOimplement();
-     //c.register(cond);
+     Client cl = new Client("asmahane", "asma", "0672673245", "asmae.as@gmail.com", "Asm12@T1");
+     IConducteurDAO c = new IConducteurDAOImplement();
+     //i.register(cl);
      //Reservation r = new Reservation("Sidi Abbad", "Targa", "Carte Bancaire", 30.0f, date, time, cl);
      //res.insertReservation(r);
      //c.login("jacki.f@gmail.com", "Ja@18");
-     c.register(cond);
+     //c.register(cond);
 
      //ITaxiDAO taxi = new ITaxiDAOImplementation();
      //IReservationDAO res = new IReservationDAOImplement();

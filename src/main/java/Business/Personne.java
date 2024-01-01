@@ -18,6 +18,7 @@ public class Personne {
         this.email = email;
         this.password = password;
     }
+    public Personne () {}
     //getters
     public int getId() {
         return id;

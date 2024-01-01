@@ -5,6 +5,7 @@ public class Client extends Personne {
 
         super(nom, prenom, telephone, email, password);
     }
+    public Client () {}
     public int getIdClient() {
 
         return super.getId();

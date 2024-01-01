@@ -25,7 +25,7 @@ public class GestionReservation {
     public GestionReservation() {
 
     }
-    public void Reserver(String lieuSource, String lieuDestination, Client cl) {
+    public void Reserver(String lieuSource, String lieuDestination, String modePaiement, Client cl) {
         //la conversion du lieuDestination et lieuSource en latitude et longitude
         System.out.println("LongitudeSource: " + getLongitudeLieu(lieuSource));
         System.out.println("LatitudeSource: " + getLatitudeLieu(lieuSource));
@@ -38,7 +38,7 @@ public class GestionReservation {
         LocalDate date = LocalDate.now();
         float tarif = (float) CalculTarifEnFctDistance(lieuSource, lieuDestination);
         IReservationDAO res = new IReservationDAOImplement();
-        Reservation r = new Reservation(lieuSource, lieuDestination, "Carte Bancaire", tarif , date, time, cl );
+        Reservation r = new Reservation(lieuSource, lieuDestination, modePaiement, tarif , date, time, cl );
         res.insertReservation(r);
     }
 

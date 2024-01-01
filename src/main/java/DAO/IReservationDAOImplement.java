@@ -13,7 +13,7 @@ public class IReservationDAOImplement implements IReservationDAO{
     ResultSet rs = null;
 
     IClientDAO client = new IClientDAOImplement();
-    IConducteurDAO conducteur = new IConducteurDAOimplement();
+    IConducteurDAO conducteur = new IConducteurDAOImplement();
     ITaxiDAO taxi = new ITaxiDAOImplementation();
     public void getAllReservations() {
         try {
@@ -37,7 +37,7 @@ public class IReservationDAOImplement implements IReservationDAO{
     }
     public void insertReservation(Reservation r) {
 
-        int idClient = client.getIdFromDB(r.getClient()); // l'argument est un client
+        int idClient = client.getIdFromDB(r.getClient().getEmail()); // l'argument est email
 
         List<Object> l = conducteur.getRandomConducteur(); // retourne une listequi contient l'id d'un conducteur affecté à une reservation + le matricule de son taxi
 
