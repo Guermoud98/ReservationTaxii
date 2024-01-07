@@ -28,7 +28,9 @@ CREATE TABLE taxi (
 
 );
 SELECT * FROM taxi;
-DEF789
+
+
+
 DELETE taxi;
 DROP TABLE taxi;
 UPDATE taxi SET affectationConducteur= 'Non' WHERE matricule = 'VWX567';

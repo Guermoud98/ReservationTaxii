@@ -63,7 +63,7 @@ public class InscriptionPage extends JFrame {
                             JOptionPane.showMessageDialog(InscriptionPage.this, "Les champs ne doivent pas etre vide", "champ invalide",  JOptionPane.ERROR_MESSAGE);
                             break;
                         case AUCUNE_ERREUR:
-                            new ReservationPage();
+                            new ConnexionPage();
                             dispose();
                             break;
                     }
@@ -85,7 +85,7 @@ public class InscriptionPage extends JFrame {
                             JOptionPane.showMessageDialog(InscriptionPage.this, "Les champs ne doivent pas etre vide", "champ invalide",  JOptionPane.ERROR_MESSAGE);
                             break;
                         case AUCUNE_ERREUR:
-                            new ReservationPage();
+                            new ConnexionPage();
                             //new ConducteurProfilPage();
                             dispose();
                             break;
